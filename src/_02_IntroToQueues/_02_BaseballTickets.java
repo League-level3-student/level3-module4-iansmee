@@ -34,37 +34,66 @@ import java.util.ArrayDeque;
 
 public class _02_BaseballTickets {
 
-    public static int calculateWaitTime( ArrayDeque<Integer> ticketsQueue, int position ) {
-        int rad = 0;
-        int cool = 0;
-        int cooler = 0;
-        int counter = 0;
-        
-        
-        if(position == 0) {
-        	cooler = ticketsQueue.getFirst();
-        }
-        
-        while( cooler > 0){
-        	counter +=1;
-        	
-        	if(ticketsQueue.getFirst() == 0) {
-        		ticketsQueue.remove();
-        	}
-        	
-        	rad = ticketsQueue.remove();
-        	rad -=1;
-        	ticketsQueue.add(rad);
-        	
-        	if(counter % ticketsQueue.size() ==0) {
-        		cooler = ticketsQueue.getFirst();
-        	}
-        }
-        
-        
-   
-    	
-    	
-        return counter;
-    }
-}
+	public static int calculateWaitTime(ArrayDeque<Integer> ticketsQueue, int position) {
+		int rad = 0;
+		int cool = 0;
+		int cooler = 0;
+		int counter = 0;
+		int position2 = position;
+
+		if (position == 0) {
+			cooler = ticketsQueue.getFirst();
+			
+			
+		} else {
+			
+			for (int i = 0; i < position; i++) {
+				cool = ticketsQueue.remove();
+				ticketsQueue.add(cool);
+			}
+			cooler = ticketsQueue.getFirst();
+			
+			
+			for (int i = 0; i < ticketsQueue.size() - position; i++) {
+				cool = ticketsQueue.remove();
+				ticketsQueue.add(cool);
+			}
+			
+		}
+		
+		while(cooler > 0) {
+			
+			
+			if(position2 <= 0) {
+				position2 = ticketsQueue.size();
+				cooler -=1;
+			}
+				
+				rad = ticketsQueue.remove();
+				counter += 1;
+				rad -= 1;
+				position2 -=1;
+				if(rad != 0) {
+					ticketsQueue.add(rad);
+				}
+				else {
+					position2 --;
+				}
+				
+				
+				
+				
+			
+				
+				
+				
+		}
+		
+		
+				return counter;
+		
+		
+	}
+	}
+
+
